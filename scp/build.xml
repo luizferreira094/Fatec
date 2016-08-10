@@ -46,7 +46,7 @@
 		            </classpath>
 		            
 		            <batchtest fork="yes">
-		                <fileset dir="${src.teste}" includes="**/*Test.class" />
+		                <fileset dir="${src.teste}" includes="**/UC*.java" />
 		            </batchtest>
 		        </junit>
 	</target>
