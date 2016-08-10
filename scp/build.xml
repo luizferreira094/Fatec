@@ -1,61 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ====================================================================== 
-     9 de ago de 2016 18:06:27                                                        
+ 
+ <project name="sceweb2" basedir="." default="deploy">
+ <!-- O atributo default indica qual target sera executado se nenhum outro for informado via linha de comando -->
+ <!-- O atributo basedir define o diretorio base onde as tarefas serao executadas. -->
+ <!-- ctrl + barra de espaco para obter o template -->
+ 	<property file="build.properties" />
+ 
+ 	<property name="build.dir" value="build" />
+ 	
+ 	<property name="lib.dir" value="WebContent/WEB-INF/lib" />
+	
+	<property name="src.dir" value="src/main/java" />
+	
+	<property name="web.dir" value="WebContent" />
+	
+	<property name="test.dir" value="src/teste/java" />
 
-     Sistema de Controle Predial
-                   
-     edson                                                                
-     ====================================================================== -->
-<project name="scp" default="compile">
-    <description>
-            Sistema de Controle Predial
-    </description>
-    
-	<target name="init">
-	    <mkdir dir="build/classes"/>
-	    <mkdir dir="dist" />
-	</target>
-	 <!-- - - - - - - - - - - - - - - - - - 
-	   The next step is to compile all the classes in the src directory 
-	   and place them in the build/classes directory. To do this first 
-	   you need to add all the lib files inside the "WebContent/WEB-INF/lib" 
-	   directory to the classpath.                      
-	         - - - - - - - - - - - - - - - - - -->
-	<path id="compile.classpath">
-	    <fileset dir="WebContent/WEB-INF/lib">
-	        <include name="*.jar"/>
-	    </fileset>
+	<property name="test.build.dir" value="${build.dir}/test" />
+
+	<property name="deploy.dir" value="C:/apache-tomcat-7.0.59-windows-x64/apache-tomcat-7.0.59/webapps" />
+
+	<path id="classpath.build">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		
 	</path>
-	<!-- - - - - - - - - - - - - - - - - - 
-	   The target compile uses the javac task to compile the java classes 
-	   and it depends on the target init, because only when you have the 
-	   directory ready you can place the classes inside them. 
-	   The path we created earlier will be refered here using the <classpath> element.                    
-		         - - - - - - - - - - - - - - - - - -->
-	<target name="compile" depends="init" >
-	    <javac destdir="build/classes" debug="true" srcdir="src" encoding="UTF-8">
-	        <classpath refid="compile.classpath"/>
-	    </javac>
+ 	<path id="tests.classpath" path=".">
+ 			<fileset dir="WebContent/WEB-INF/lib/">
+ 				<include name="*.jar" />
+ 			</fileset>
+ 			<pathelement path="target/classes/" />
+ 	</path>
+	<target name="init">
+		<delete>
+			<fileset dir="${build.dir}" includes="**/*"/>
+		</delete>
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/classes" />
+		<mkdir dir="${build.dir}/WEB-INF/lib" />
+		<mkdir dir="${build.dir}/WEB-INF/classes" />
+		<mkdir dir="${build.dir}/classes-test/"/>
 	</target>
-	<!-- - - - - - - - - - - - - - - - - - 
-	   Now we can create the war file using the war task. To create the war file you 
-	   need to specify the web directory, lib directory and the classes directory. 
-	   The destfile attribute specifies the war file location and the webxml 
-	   attribute specifies the web.xml file location.            
-			         - - - - - - - - - - - - - - - - - -->
-	<target name="war" depends="compile">
-	    <war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml">
-	        <fileset dir="WebContent"/>
-	        <lib dir="WebContent/WEB-INF/lib"/>
-	        <classes dir="build/classes"/>
-	    </war>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src.dir}"  destdir="${build.dir}/WEB-INF/classes" debug="on" fork="yes" classpathref="classpath.build" />
+		<javac srcdir="${test.dir}" destdir="${build.dir}/classes-test/" classpathref="tests.classpath" debug="true" encoding="UTF-8" />
 	</target>
-	<!-- - - - - - - - - - - - - - - - - - 
-		You can use the clean target to clean the project. 
-		The clean target deletes the build and the dist directory.            
-				         - - - - - - - - - - - - - - - - - -->
-	<target name="clean">
-	    <delete dir="dist" />
-	    <delete dir="build" />
+
+	<target name="deploy" depends="war,jar" description="Generates the ear file and deploys to deploy directory">
+		<copy todir="${deploy.dir}" file="${build.dir}/${ant.project.name}.war" overwrite="true" />
 	</target>
+
+	<target name="war" depends="pre-war">
+		<war destfile="${build.dir}/${ant.project.name}.war" webxml="${build.dir}/WEB-INF/web.xml">
+			<fileset dir="${build.dir}">
+				<include name="WEB-INF/**" />
+			</fileset>
+			<fileset dir="${web.dir}">
+				<include name="**/CSS/**/*.css" />
+				<include name="**/*.js" />
+				<include name="**/Imagens/**/*" />
+				<include name="**/*.html" />
+				<include name="**/*.jsp" />
+				<include name="**/*.gif" />
+			</fileset>
+		</war>
+	</target>
+
+	<!-- BUILD THE JAR FILE -->
+	<target name="jar" depends="init,compile,test">
+		<echo message="${build.dir}" />
+	 	<echo message="ant.project.name=${ant.project.name}"/>
+       
+		<jar destfile="${build.dir}/${ant.project.name}.jar">
+			<fileset dir="${build.dir}/classes/" />
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+			<fileset dir="${web.dir}">
+				<include name="META-INF/**" />
+			</fileset>
+		</jar>
+	</target>
+ 	<!-- a tarefa teste deve incluir um diretorio lib com o ant-junit.jar e o junit.jar -->
+ 	<target name="test" depends="compile">
+ 		<echo message="Configurando a execucao do teste..." />
+ 			<junit fork="yes" forkmode="once"  printsummary="true" showoutput="true" failureproperty="failed-test" haltonfailure="true" >
+ 				<formatter type="plain" usefile="false" />
+ 				<classpath location="${build.dir}/classes-test/" />
+ 				<classpath refid="tests.classpath" />
+ 				<batchtest fork="yes" todir="${artifacts.dir}/reports">
+ 					<fileset dir="${build.dir}/classes-test/"  >
+ 						<include name="**/*Test.class" />
+ 					</fileset>
+ 				</batchtest>
+ 			</junit>
+ 	</target>
+	<target name="pre-war" depends="compile">
+		<copy todir="${build.dir}/WEB-INF/lib">
+			<fileset dir="${lib.dir}">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+		<copy todir="${build.dir}/WEB-INF">
+			<fileset dir="${web.dir}/WEB-INF">
+				<include name="**/*" />
+			</fileset>
+		</copy>
+	</target>
+	
 </project>
