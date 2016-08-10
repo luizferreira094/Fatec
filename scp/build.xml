@@ -3,6 +3,7 @@
 <project name="Formulario" basedir="." default="main">
 
     <property name="src.dir"     value="src/main/java"/>
+	<property name="lib.dir"     value="WebContent/WEB-INF/lib"/>
 
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
@@ -10,7 +11,9 @@
 
     <property name="main-class"  value="br.scp.visao.Formulario"/>
 
-
+	 <path id="classpath">
+	        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+	 </path>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -18,7 +21,7 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
     </target>
 
     <target name="jar" depends="compile">
@@ -31,7 +34,12 @@
     </target>
 
     <target name="run" depends="jar">
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+    	<java fork="true" classname="${main-class}">
+    	            <classpath>
+    	                <path refid="classpath"/>
+    	                <path location="${jar.dir}/${ant.project.name}.jar"/>
+    	            </classpath>
+    	 </java>
     </target>
 
     <target name="clean-build" depends="clean,jar"/>

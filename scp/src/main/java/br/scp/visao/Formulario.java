@@ -1,9 +1,11 @@
 package br.scp.visao;
 
-public class Formulario {
+import org.apache.log4j.Logger;
 
+public class Formulario {
+	static Logger logger = Logger.getLogger(Formulario.class);
 	public static void main(String[] args) {
-		System.out.println("executa formulario scp");
+		logger.info("Hello World"); 
 
 	}
 
