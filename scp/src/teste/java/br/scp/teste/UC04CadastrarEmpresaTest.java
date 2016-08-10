@@ -29,7 +29,7 @@ public class UC04CadastrarEmpresaTest {
 	}
 	@Test
 	public void CT01UC04FBcadastrar_com_sucesso() {
-		assertEquals (3,empresa.getConjuntos().size());
+		assertEquals (4,empresa.getConjuntos().size());
 	}
 	@Test
 	public void CT02UC04FBcadastrar_com_sucesso() {
