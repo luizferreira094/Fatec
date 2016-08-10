@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     9 de ago de 2016 18:06:27                                                        
+
+     Sistema de Controle Predial
+                   
+     edson                                                                
+     ====================================================================== -->
+<project name="scp" default="compile">
+    <description>
+            Sistema de Controle Predial
+    </description>
+    
+	<target name="init">
+	    <mkdir dir="build/classes"/>
+	    <mkdir dir="dist" />
+	</target>
+	 <!-- - - - - - - - - - - - - - - - - - 
+	   The next step is to compile all the classes in the src directory 
+	   and place them in the build/classes directory. To do this first 
+	   you need to add all the lib files inside the "WebContent/WEB-INF/lib" 
+	   directory to the classpath.                      
+	         - - - - - - - - - - - - - - - - - -->
+	<path id="compile.classpath">
+	    <fileset dir="WebContent/WEB-INF/lib">
+	        <include name="*.jar"/>
+	    </fileset>
+	</path>
+	<!-- - - - - - - - - - - - - - - - - - 
+	   The target compile uses the javac task to compile the java classes 
+	   and it depends on the target init, because only when you have the 
+	   directory ready you can place the classes inside them. 
+	   The path we created earlier will be refered here using the <classpath> element.                    
+		         - - - - - - - - - - - - - - - - - -->
+	<target name="compile" depends="init" >
+	    <javac destdir="build/classes" debug="true" srcdir="src" encoding="UTF-8">
+	        <classpath refid="compile.classpath"/>
+	    </javac>
+	</target>
+	<!-- - - - - - - - - - - - - - - - - - 
+	   Now we can create the war file using the war task. To create the war file you 
+	   need to specify the web directory, lib directory and the classes directory. 
+	   The destfile attribute specifies the war file location and the webxml 
+	   attribute specifies the web.xml file location.            
+			         - - - - - - - - - - - - - - - - - -->
+	<target name="war" depends="compile">
+	    <war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml">
+	        <fileset dir="WebContent"/>
+	        <lib dir="WebContent/WEB-INF/lib"/>
+	        <classes dir="build/classes"/>
+	    </war>
+	</target>
+	<!-- - - - - - - - - - - - - - - - - - 
+		You can use the clean target to clean the project. 
+		The clean target deletes the build and the dist directory.            
+				         - - - - - - - - - - - - - - - - - -->
+	<target name="clean">
+	    <delete dir="dist" />
+	    <delete dir="build" />
+	</target>
+</project>
