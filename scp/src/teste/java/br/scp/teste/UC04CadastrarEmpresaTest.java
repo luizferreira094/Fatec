@@ -9,7 +9,7 @@ import org.junit.Test;
 import br.scp.controle.Controle;
 import br.scp.modelo.Empresa;
 
-public class UC04CadastrarEmpresa {
+public class UC04CadastrarEmpresaTest {
 	static public Empresa empresa;
 	static public Controle controle;
 	@BeforeClass
