@@ -53,8 +53,8 @@ public class Formulario extends JFrame {
 		
 		// Dimensiona a tela
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setBounds((screenSize.width - 600) / 2, (screenSize.height - 460) / 2,
-				600, 460);// largura x altura
+		setBounds((screenSize.width - 600) / 2, (screenSize.height - 490) / 2,
+				600, 490);// largura x altura
 
 		// registro no listener dos objetos controlados
 		controle = new Controle();
@@ -250,7 +250,7 @@ public class Formulario extends JFrame {
 		if (txtTemperaturaMaxima == null) {
 			txtTemperaturaMaxima = new JTextField();
 			txtTemperaturaMaxima.setSize(140, 40); // largura x altura
-			txtTemperaturaMaxima.setLocation(150, 300); // horizontal x vertical
+			txtTemperaturaMaxima.setLocation(150, 310); // horizontal x vertical
 			txtTemperaturaMaxima.setBorder(javax.swing.BorderFactory.createTitledBorder(
 					null, "Temperatura Maxima",
 					javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
@@ -265,7 +265,7 @@ public class Formulario extends JFrame {
 		if (txtMensagem == null) {
 			txtMensagem = new JTextField();
 			txtMensagem.setSize(550, 40); // largura x altura
-			txtMensagem.setLocation(10, 340); // horizontal x vertical
+			txtMensagem.setLocation(10, 370); // horizontal x vertical
 			txtMensagem.setBorder(javax.swing.BorderFactory.createTitledBorder(
 					null, "Mensagem",
 					javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
