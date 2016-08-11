@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Formulario" basedir="." default="run">
+<project name="SistemaCP" basedir="." default="run">
 
 	<property name="src.dir" value="src/main/java" />
 	<property name="src.teste" value="src/teste/java" />
@@ -10,7 +10,7 @@
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}/jar" />
 
-	<property name="main-class" value="br.scp.visao.Formulario" />
+	<property name="main-class" value="br.scp.visao.SistemaCP" />
 
 	<path id="classpath">
 		<fileset dir="${lib.dir}" includes="**/*.jar" />
