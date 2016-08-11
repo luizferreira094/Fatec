@@ -35,6 +35,9 @@ public class UC04CadastrarEmpresaTest {
 	public void CT02UC04FBcadastrar_com_sucesso() {
 		assertEquals ("cadastro realizado com sucesso",controle.setAtributos("02683322000108", "grupo pao de acucar", 8, 18, 111, 112, 113, 21,8,18));
 	}
+	/*
+	 * teste de cnpj
+	 */
 	@Test
 	public void CT03UC04FBcadastrar_empresa_cnpj_invalido() {
 		assertEquals ("dados invalidos",controle.setAtributos("026833220001081", "grupo pao de acucar", 8, 18, 111, 112, 113, 21,8,18));
