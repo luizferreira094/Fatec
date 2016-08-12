@@ -39,6 +39,8 @@ public class Formulario extends JFrame {
 	private JTextField txtConjunto2= null;
 	private JTextField txtConjunto3= null;
 	private JTextField txtTemperaturaMaxima= null;
+	private JTextField txtArHI= null;
+	private JTextField txtArHT= null;
 	private JTextField txtMensagem = null;
 	Controle controle;
 	public Formulario() {
@@ -104,7 +106,8 @@ public class Formulario extends JFrame {
 			pnlCentral.add(getTxtConjunto2(), null);
 			pnlCentral.add(getTxtConjunto3(), null);
 			pnlCentral.add(getTxtTemperaturaMaxima(), null);
-			
+			pnlCentral.add(getTxtArHI(), null);
+			pnlCentral.add(getTxtArHT(), null);
 			pnlCentral.add(getTxtMensagem(), null);
 			
 
@@ -260,6 +263,36 @@ public class Formulario extends JFrame {
 					java.awt.Font.PLAIN, 12));
 		}
 		return txtTemperaturaMaxima;
+	}
+	public JTextField getTxtArHI() {
+		if (txtArHI == null) {
+			txtArHI = new JTextField();
+			txtArHI.setSize(140, 40); // largura x altura
+			txtArHI.setLocation(300, 310); // horizontal x vertical
+			txtArHI.setBorder(javax.swing.BorderFactory.createTitledBorder(
+					null, "Ar Horario de inicio",
+					javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+					javax.swing.border.TitledBorder.DEFAULT_POSITION,
+					new java.awt.Font("Dialog", java.awt.Font.BOLD, 11), null));
+			txtArHI.setFont(new java.awt.Font("Dialog",
+					java.awt.Font.PLAIN, 12));
+		}
+		return txtArHI;
+	}
+	public JTextField getTxtArHT() {
+		if (txtArHT == null) {
+			txtArHT = new JTextField();
+			txtArHT.setSize(140, 40); // largura x altura
+			txtArHT.setLocation(440, 310); // horizontal x vertical
+			txtArHT.setBorder(javax.swing.BorderFactory.createTitledBorder(
+					null, "Ar Horario de termino",
+					javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
+					javax.swing.border.TitledBorder.DEFAULT_POSITION,
+					new java.awt.Font("Dialog", java.awt.Font.BOLD, 11), null));
+			txtArHT.setFont(new java.awt.Font("Dialog",
+					java.awt.Font.PLAIN, 12));
+		}
+		return txtArHT;
 	}
 	public JTextField getTxtMensagem() {
 		if (txtMensagem == null) {
