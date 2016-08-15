@@ -309,6 +309,10 @@ public class Formulario extends JFrame {
 		}
 		return txtMensagem;
 	}
+	/**
+	 * manipula os eventos do botao confirma
+	 * @return - um objeto do JButton
+	 */
 	public JButton getBtnConfirma() {
 
 		if (btnConfirma == null) {
