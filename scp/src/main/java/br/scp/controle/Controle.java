@@ -7,19 +7,20 @@ public class Controle {
 	public Controle() {
 		empresa = new Empresa();
 	}
-	public String setAtributos(String cnpj, String rs, int he, int hs, int cj1, int cj2, int cj3, int temp, int hi, int ht) {
+	public String setAtributos(String cnpj, String rs, String end, String he, String hs, String cj1, String cj2, String cj3, String temp, String hi, String ht) {
 		String msg = "";
 		try {
 			empresa.setCnpj(cnpj);
 			empresa.setRazaoSocial(rs);
-			empresa.setHorarioEntrada(he);
-			empresa.setHorarioSaida(hs);
-			empresa.setConjuntos(cj1);
-			empresa.setConjuntos(cj2);
-			empresa.setConjuntos(cj3);
-			empresa.setTemperaturaMaxima(temp);
-			empresa.setTemperaturaHI(hi);
-			empresa.setTemperaturaHT(ht);
+			empresa.setEndereco(end);
+			empresa.setHorarioEntrada(Integer.parseInt(he));
+			empresa.setHorarioSaida(Integer.parseInt(hs));
+			empresa.setConjuntos(Integer.parseInt(cj1));
+			empresa.setConjuntos(Integer.parseInt(cj2));
+			empresa.setConjuntos(Integer.parseInt(cj3));
+			empresa.setTemperaturaMaxima(Integer.parseInt(temp));
+			empresa.setTemperaturaHI(Integer.parseInt(hi));
+			empresa.setTemperaturaHT((Integer.parseInt(ht)));
 			msg = "cadastro realizado com sucesso";
 		} catch (Exception e) {
 			msg = "dados invalidos";

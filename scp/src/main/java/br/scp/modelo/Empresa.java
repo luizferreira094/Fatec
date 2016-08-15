@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 public class Empresa {
 	String cnpj;
 	String razaoSocial;
+	String endereco;
 	int horarioEntrada;
 	int horarioSaida;
 	ArrayList<Conjunto> conjuntos;
@@ -34,6 +35,12 @@ public class Empresa {
 			throw new IllegalArgumentException("Razao social invalida");
 		else
 		this.razaoSocial = razaoSocial;
+	}
+	public void setEndereco(String end){
+		this.endereco = end;
+	}
+	public String getEndereco(){
+		return endereco;
 	}
 	public int getHorarioEntrada() {
 		return horarioEntrada;

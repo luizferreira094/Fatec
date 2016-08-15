@@ -29,8 +29,8 @@ public class Formulario extends JFrame {
 	/***************************************************************************
 	 * campos do formulario
 	 **************************************************************************/
-	private JTextField txtCPF = null;
-	private JTextField txtNome = null;
+	private JTextField txtCNPJ = null;
+	private JTextField txtRazaoSocial = null;
 	private JTextField txtEndereco= null;
 	private JTextField txtTelefone= null;
 	private JTextField txtHI= null;
@@ -96,8 +96,8 @@ public class Formulario extends JFrame {
 			pnlCentral = new JPanel();
 			pnlCentral.setLayout(null);
 			pnlCentral.setFont(new Font("Dialog", Font.PLAIN, 11));
-			pnlCentral.add(getTxtCPF(), null);
-			pnlCentral.add(getTxtNome(), null);
+			pnlCentral.add(getTxtCNPJ(), null);
+			pnlCentral.add(getTxtRazaoSocial(), null);
 			pnlCentral.add(getTxtEndereco(), null);
 			pnlCentral.add(getTxtTelefone(), null);
 			pnlCentral.add(getTxtHI(), null);
@@ -114,35 +114,35 @@ public class Formulario extends JFrame {
 		}
 		return pnlCentral;
 	}
-	public JTextField getTxtCPF() {
-		if (txtCPF == null) {
-			txtCPF = new JTextField();
-			txtCPF.setSize(95, 40); // largura x altura
-			txtCPF.setLocation(150, 10); // horizontal x vertical
-			txtCPF.setBorder(javax.swing.BorderFactory.createTitledBorder(
+	public JTextField getTxtCNPJ() {
+		if (txtCNPJ == null) {
+			txtCNPJ = new JTextField();
+			txtCNPJ.setSize(95, 40); // largura x altura
+			txtCNPJ.setLocation(150, 10); // horizontal x vertical
+			txtCNPJ.setBorder(javax.swing.BorderFactory.createTitledBorder(
 					null, "CNPJ",
 					javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 					javax.swing.border.TitledBorder.DEFAULT_POSITION,
 					new java.awt.Font("Dialog", java.awt.Font.BOLD, 11), null));
-			txtCPF.setFont(new java.awt.Font("Dialog",
+			txtCNPJ.setFont(new java.awt.Font("Dialog",
 					java.awt.Font.PLAIN, 12));
 		}
-		return txtCPF;
+		return txtCNPJ;
 	}
-	public JTextField getTxtNome() {
-		if (txtNome == null) {
-			txtNome = new JTextField();
-			txtNome.setSize(285, 40); // largura x altura
-			txtNome.setLocation(150, 60); // horizontal x vertical
-			txtNome.setBorder(javax.swing.BorderFactory.createTitledBorder(
+	public JTextField getTxtRazaoSocial() {
+		if (txtRazaoSocial == null) {
+			txtRazaoSocial = new JTextField();
+			txtRazaoSocial.setSize(285, 40); // largura x altura
+			txtRazaoSocial.setLocation(150, 60); // horizontal x vertical
+			txtRazaoSocial.setBorder(javax.swing.BorderFactory.createTitledBorder(
 					null, "Razao Social",
 					javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
 					javax.swing.border.TitledBorder.DEFAULT_POSITION,
 					new java.awt.Font("Dialog", java.awt.Font.BOLD, 11), null));
-			txtNome.setFont(new java.awt.Font("Dialog",
+			txtRazaoSocial.setFont(new java.awt.Font("Dialog",
 					java.awt.Font.PLAIN, 12));
 		}
-		return txtNome;
+		return txtRazaoSocial;
 	}
 	public JTextField getTxtEndereco() {
 		if (txtEndereco == null) {
@@ -317,8 +317,11 @@ public class Formulario extends JFrame {
 			btnConfirma.setText("Confirma");
 			btnConfirma.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					//getTxtMensagem().setText(controle.cadastra(getTxtCPF().getText(),getTxtNome().getText(),getTxtEndereco().getText(),
-							                                //   getTxtTelefone().getText()));
+					txtMensagem.setText(controle.setAtributos(getTxtCNPJ().getText(), getTxtRazaoSocial().getText(), getTxtEndereco().getText(),
+							getTxtHI().getText(), getTxtHT().getText(),getTxtConjunto1().getText(),
+							getTxtConjunto2().getText(),getTxtConjunto3().getText(),
+							getTxtTemperaturaMaxima().getText(),getTxtArHI().getText(), getTxtArHT().getText()));
+					
 				}
 			});
 		}
