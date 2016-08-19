@@ -78,6 +78,9 @@ public class Empresa {
 	public void setTemperaturaMaxima(int temp){
 		controleDeTemperatura.setTemperaturaMaxima(temp);
 	}
+	public ControleDeTemperatura getControleDeTemperatura(){
+		return controleDeTemperatura;
+	}
 	/*
 	 * valida o cnpj
 	 */
