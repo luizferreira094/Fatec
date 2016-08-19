@@ -9,7 +9,7 @@ import com.mysql.jdbc.Connection;
 public class FabricaDeConexoes {
 	Logger logger = Logger.getLogger(FabricaDeConexoes.class);
 	public Connection getConnection(){
-		String url = "jdbc:mysql://localhost/sceweb";
+		String url = "jdbc:mysql://localhost/scp";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			return (Connection) DriverManager.getConnection(url,"root","");

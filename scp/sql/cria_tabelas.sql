@@ -5,21 +5,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema spc
+-- Schema scp
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema spc
+-- Schema scp
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `spc` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `spc` ;
+CREATE SCHEMA IF NOT EXISTS `scp` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `scp` ;
 
 -- -----------------------------------------------------
--- Table `spc`.`Empresa`
+-- Table `scp`.`Empresa`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spc`.`Empresa` ;
+DROP TABLE IF EXISTS `scp`.`Empresa` ;
 
-CREATE TABLE IF NOT EXISTS `spc`.`Empresa` (
+CREATE TABLE IF NOT EXISTS `scp`.`Empresa` (
   `cnpj` VARCHAR(15) NOT NULL COMMENT '',
   `razaoSocial` VARCHAR(45) NULL COMMENT '',
   `endereco` VARCHAR(45) NULL COMMENT '',
@@ -31,29 +31,29 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `spc`.`Conjunto`
+-- Table `scp`.`Conjunto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spc`.`Conjunto` ;
+DROP TABLE IF EXISTS `scp`.`Conjunto` ;
 
-CREATE TABLE IF NOT EXISTS `spc`.`Conjunto` (
+CREATE TABLE IF NOT EXISTS `scp`.`Conjunto` (
   `Empresa_cnpj` VARCHAR(15) NOT NULL COMMENT '',
   `numeroConjunto` INT NOT NULL COMMENT '',
   PRIMARY KEY (`numeroConjunto`)  COMMENT '',
   INDEX `fk_Conjunto_Empresa1_idx` (`Empresa_cnpj` ASC)  COMMENT '',
   CONSTRAINT `fk_Conjunto_Empresa1`
     FOREIGN KEY (`Empresa_cnpj`)
-    REFERENCES `spc`.`Empresa` (`cnpj`)
+    REFERENCES `scp`.`Empresa` (`cnpj`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `spc`.`ControleDeTemperatura`
+-- Table `scp`.`ControleDeTemperatura`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spc`.`ControleDeTemperatura` ;
+DROP TABLE IF EXISTS `scp`.`ControleDeTemperatura` ;
 
-CREATE TABLE IF NOT EXISTS `spc`.`ControleDeTemperatura` (
+CREATE TABLE IF NOT EXISTS `scp`.`ControleDeTemperatura` (
   `Empresa_cnpj` VARCHAR(15) NOT NULL COMMENT '',
   `temperaturaMaxima` INT NULL COMMENT '',
   `horarioInicio` INT NULL COMMENT '',
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `spc`.`ControleDeTemperatura` (
   INDEX `fk_ControleDeTemperatura_Empresa_idx` (`Empresa_cnpj` ASC)  COMMENT '',
   CONSTRAINT `fk_ControleDeTemperatura_Empresa`
     FOREIGN KEY (`Empresa_cnpj`)
-    REFERENCES `spc`.`Empresa` (`cnpj`)
+    REFERENCES `scp`.`Empresa` (`cnpj`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
