@@ -6,6 +6,7 @@ public class Empresa {
 	String cnpj;
 	String razaoSocial;
 	String endereco;
+	String telefone;
 	int horarioEntrada;
 	int horarioSaida;
 	ArrayList<Conjunto> conjuntos;
@@ -41,6 +42,12 @@ public class Empresa {
 	}
 	public String getEndereco(){
 		return endereco;
+	}
+	public String getTelefone(){
+		return telefone;
+	}
+	public void setTelefone(String t){
+		telefone = t;
 	}
 	public int getHorarioEntrada() {
 		return horarioEntrada;

@@ -8,10 +8,12 @@ import org.junit.Test;
 
 import br.scp.controle.Controle;
 import br.scp.modelo.Empresa;
+import br.scp.modelo.EmpresaDAO;
 
 public class UC04CadastrarEmpresaTest {
 	static public Empresa empresa;
 	static public Controle controle;
+	static public EmpresaDAO empresaDAO;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		controle = new Controle();
@@ -39,8 +41,16 @@ public class UC04CadastrarEmpresaTest {
 	 * teste de cnpj
 	 */
 	@Test
-	public void CT03UC04FBcadastrar_empresa_cnpj_invalido() {
+	public void CT03UC04A1cadastrar_empresa_cnpj_invalido() {
 		assertEquals ("dados invalidos",controle.setAtributos("026833220001081", "grupo pao de acucar","rua taquari", "8", "18", "111", "112", "113", "21","8","18"));
+	}
+	/*
+	 * teste de cnpj
+	 */
+	@Test
+	public void CT04UC04FBcadastrar_empresa_com_sucesso() {
+		empresaDAO = new EmpresaDAO();
+		assertEquals (1,empresaDAO.adiciona(empresa));
 	}
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
